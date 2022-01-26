@@ -1,0 +1,32 @@
+﻿<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        @User.Identity.Name
+    </a>
+    <div id="mymenu" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a id="myCart" class="dropdown-item" asp-controller="Cart" asp-action="Index">購物車 </a>
+        <a id="myOrder" class="dropdown-item" asp-controller="Order" asp-action="Index">我的訂單 </a>
+        <a id="myWishList" class="dropdown-item" asp-controller="Home" asp-action="WishList">我的最愛 </a>
+        <a class="dropdown-item" asp-controller="Home" asp-action="UserProfile">會員中心</a>
+    </div>
+</li>
+
+<li class="nav-item">
+    <div class="user-alert">
+        <button id="btnNotify" class="btn-notify">
+            <i class="far fa-bell"></i>
+            <div id="blip" class="blip"></div>
+        </button>
+
+        <div id="notification" class="notification">
+            <div class="notify-content">
+                <div class="notify-text">
+                    <h1>Messages</h1>
+                    <p>目前無任何訊息！</p>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</li>

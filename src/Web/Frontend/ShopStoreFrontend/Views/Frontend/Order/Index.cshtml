@@ -1,0 +1,109 @@
+﻿@model List<ShopStoreFrontend.Domain.ViewModels.OrderViewModel>
+
+<link rel="stylesheet" href="~/css/Frontend/Order/Index.css" />
+
+<div style="margin-top: 30px">
+    <h3>我的訂單</h3>
+    <hr />
+    <div id="prodetail" style="display:none">
+        <div id="prodetailConent"></div>
+        <div class="text-center">
+            <a href="javascript: void(0)" onclick="ShowProductDetail()">回我的訂單</a>
+        </div>
+    </div>
+    <div id="orderTable" class="table-responsive" style="margin-bottom: 60px; box-shadow: 0px 4px 10px gray;">
+        <table id="orderList" class="table  table-hover  ">
+            <thead>
+                <tr>
+                    <th scope="col">訂單編號</th>
+                    <th scope="col">訂單日期</th>
+                    <th class="text-md-center" scope="col">商品數量</th>
+                    <th class="text-md-center" scope="col">配送狀態</th>
+                    <th class="text-md-center" scope="col">配送方式</th>
+                    <th class="text-md-center" scope="col">訂單金額</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            @if (Model != null && Model.Count > 0)
+            {
+                @foreach (var order in Model)
+                {
+                    <tbody id="tb_@order.Num">
+                        <tr>
+                            <td><b>#@order.Num</b></td>
+                            <td>@order.Date</td>
+                            <td class="text-md-center">@order.TotalAmountOfProducts</td>
+                            <td class="text-md-center"><span class="badge rounded-pill bg-@order.StatusBadge text-light ">@order.Status</span></td>
+                            <td class="text-md-center"><span class="badge rounded-pill @order.ShippingBadge text-light">@order.ShippingMethod</span></td>
+                            <td class="text-md-center">NT$ @order.TotalAmountOfMoney</td>
+                            <td class="text-center" scope="col"><input type="button" class="btn btn-sm btn-outline-info" value="明細" onclick="ShowOrderDetail('order_@order.Num')" /></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="7">
+                                <div id="order_@order.Num" style="display: none;">
+                                    <table id="orderList" class="table table-hover ">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">商品名稱</th>
+                                                <th class="text-right" scope="col">價格</th>
+                                                <th class="text-right" scope="col">數量</th>
+                                                <th class="text-right" scope="col">小計</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for (int i = 0; i < order.ListOfItem.Count; i++)
+                                            {
+                                                <tr>
+                                                    <td>@(i+1)</td>
+                                                    <td><a href="javascript: void(0)" onclick="ShowProductDetail('@order.ListOfItem[i].Name', '@order.ListOfItem[i].Id')">@order.ListOfItem[i].Name</a></td>
+                                                    <td class="text-right">NT$ @order.ListOfItem[i].Price</td>
+                                                    <td class="text-right">@order.ListOfItem[i].Amount</td>
+                                                    <td class="text-right">NT$ @order.ListOfItem[i].AmountOfMoney</td>
+                                                </tr>
+
+                                            }
+
+                                            @if (order.Status == "待確認")
+                                            {
+                                                <tr>
+                                                    <td class="text-right" colspan="6">
+                                                        <input type="button" class="btn btn-sm btn-outline-danger" value="取消訂單" onclick="CancelOrder(@order.Num)" />
+                                                    </td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            }
+            else
+            {
+                <tbody>
+                    <tr>
+                        <td align="center" colspan="7">
+                            您的訂單目前是空的！
+                        </td>
+                    </tr>
+                </tbody>
+
+            }
+        </table>
+    </div>
+</div>
+
+
+
+@section scripts{
+
+    <script src="~/js/Frontend/Order/Index.js" type="text/javascript" asp-append-version="true"></script>
+
+}

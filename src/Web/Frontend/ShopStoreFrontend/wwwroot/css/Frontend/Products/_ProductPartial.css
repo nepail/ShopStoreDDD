@@ -1,0 +1,33 @@
+#prodetailCard {
+    overflow: auto;
+}
+
+#prodetailCard:hover {
+    background-color: white;
+    box-shadow: 0 0 0 0;
+}
+
+#prodetailCard-title{
+    width: 450px;
+    height: 50px;
+    overflow: hidden;
+}
+
+#prodetailCard-title b {
+    width: 270px;
+    height: 50px;
+    overflow: hidden;
+    font-size: 2rem;
+}
+
+#prodetailCard-img{
+    margin-top: 15px;
+}
+
+#prodetailCard-content{
+    margin-top: 30px;
+}
+
+#productTable tr{
+    width:200px    
+}

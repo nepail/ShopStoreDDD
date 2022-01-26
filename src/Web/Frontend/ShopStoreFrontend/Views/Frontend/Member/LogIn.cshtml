@@ -1,0 +1,57 @@
+﻿@{
+    var returnUrl = Context.Request.Query["returnurl"];
+    var name = Context.Request.Path;
+}
+
+<link rel="stylesheet" href="~/css/Frontend/Member/Login.css" />
+
+<div class="col-md-10 mx-auto py-4">
+    @{
+        if (!User.Identity.IsAuthenticated)
+        {
+            <div id="memberLogin">
+                <div>
+                    <h4>登入</h4>
+                    <hr />
+                </div>
+
+                <div>
+                    <form enctype="multipart/form-data" asp-action="Login" asp-route-returnurl="@returnUrl">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input id="inputAccount" class="form-control" name="account" value="@ViewBag.account" required />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="form-control" name="pwd" type="password" value="@ViewBag.pwd" required />
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="btnMemberLogin">
+                            <input id="btnLogin" class="btn btn-lg btn-primary" type="submit" value="登入" onclick="" />
+                            <a id="forgetPcode" href="#">忘記密碼?</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+        else
+        {
+            <h2>您已經登入</h2>
+        }
+    }
+
+</div>
+
+
+
+@section scripts{
+    <script type="text/javascript" src="~/js/Frontend/Member/Login.js" asp-append-version="true"></script>
+}

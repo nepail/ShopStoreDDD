@@ -1,0 +1,109 @@
+﻿@using ShopStoreBackend.Domain.ViewModels
+@model ProductsViewModel
+
+@{
+    ViewBag.Title = "商品管理";
+}
+<div clas-moz-border-radiusrder-radiusder-radiusmd-10 mx-auto py-4">
+    <div>
+        <div id="main">
+            <form enctype="multipart/form-data" asp-controller="Manager" asp-action="CreateNewProduct">
+                <h4>新增商品</h4>
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="f_name" class="control-label" required></label>
+                            <input asp-for="f_name" class="form-control" />
+                            <span asp-validation-for="f_name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="f_price" class="control-label" required></label>
+                            <input asp-for="f_price" class="form-control" />
+                            <span asp-validation-for="f_price" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="f_isOpen" class="control-label" required></label>
+                        <div class="text-center" style="display:block;">
+                            <div class="form-check form-check-inline" style="margin-right: 200px">
+                                <input asp-for="f_isOpen" class="form-check-input" type="radio" value="1">
+                                <label class="form-check-label">是</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input asp-for="f_isOpen" class="form-check-input" type="radio" value="0">
+                                <label class="form-check-label">否</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="f_stock" class="control-label" required></label>
+                            <input asp-for="f_stock" class="form-control" />
+                            <span asp-validation-for="f_stock" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="f_categoryId" class="control-label" required></label>
+                            <select asp-for="f_categoryId" asp-items="Model.SelectListItems" class="form-control"></select>
+                            <span asp-validation-for="f_categoryId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="ProductPic" class="control-label" required></label>
+                            <div class="custom-file">
+                                <input type="file" asp-for="ProductPic" class="custom-file-input" id="customFile">
+                                @*<label class="custom-file-label" for="customFile">Choose file</label>*@
+                            </div>
+                            <span asp-validation-for="ProductPic" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div calss="form-group">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div calss="form-group">
+                            <img id="preview" style="max-height: 200px" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="f_description" class="control-label" required></label>
+                    <input asp-for="f_description" class="form-control" />
+                    <span asp-validation-for="f_description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="f_content" class="control-label" required>商品敘述</label>
+                    <textarea id="editor" asp-for="f_content" class="form-control"></textarea>
+                    <span asp-validation-for="f_content" class="text-danger"></span>
+                </div>
+                <div id="word-count"></div>
+
+                <div class="form-group">
+                    <input class="btn btn-sm btn-outline-primary btn-block" type="submit" value="新增商品" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<link href="~/css/Manager/Product/_AddNewProductPartial.css" rel="stylesheet" type="text/css" />
+<script src="~/js/Manager/Product/_AddNewProductPartial.js" type="text/javascript" asp-append-version="true"></script>
+
+<style>
+    .ck-editor__editable {
+        min-height: 500px;
+    }
+</style>

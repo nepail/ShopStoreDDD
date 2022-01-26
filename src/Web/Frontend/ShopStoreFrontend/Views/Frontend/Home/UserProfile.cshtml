@@ -1,0 +1,44 @@
+﻿@model ShopStoreFrontend.Domain.ViewModels.UserProfileViewModel
+
+
+<link rel="stylesheet" href="~/css/Frontend/Home/UserProfile.css" />
+
+<div class="wrapper">
+    <div class="left">        
+        <h4>@Model.NickName</h4>
+        <p>@Model.GroupName</p>
+    </div>
+    <div class="right">
+        <div class="info">
+            <h3>會員資料</h3>
+            <div class="info_data">
+                <div class="data">
+                    <h4>暱稱</h4>
+                    <p>@Model.NickName</p>
+                </div>
+                <div class="data">
+                    <h4>購物金</h4>
+                    <p>NT $@Model.Cash</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="projects">
+            <h3>詳細資料</h3>
+            <div class="projects_data">
+                <div class="data">
+                    <h4>真實姓名</h4>
+                    <p>@Model.RealName</p>
+                </div>
+                <div class="data">
+                    <h4>電子信箱</h4>
+                    <p>@Model.Email</p>
+                </div>
+                <div class="data">
+                    <h4>通訊地址</h4>
+                    <p>@Model.Address</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

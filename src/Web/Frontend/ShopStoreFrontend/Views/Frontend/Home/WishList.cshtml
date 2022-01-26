@@ -1,0 +1,32 @@
+﻿@page
+@*@model ShopStore.Views.Home.WishListModel*@
+@{
+}
+
+<div id="WishList">
+    <h3>願望清單</h3>
+    <hr />
+    <div  class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center"><input id="checkAll" type="checkbox"/></th>
+                    <th scope="col"></th>
+                    <th scope="col">名稱</th>
+                    <th scope="col" class="text-center">價格</th>
+                    <th scope="col" class="text-center">類型</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody id="WishTable">
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<link rel="stylesheet" href="/css/Frontend/Home/WishList.css" />
+
+@section scripts{
+<script type="text/javascript" src="~/js/Frontend/Home/WishList.js" asp-append-version="true"></script>
+}

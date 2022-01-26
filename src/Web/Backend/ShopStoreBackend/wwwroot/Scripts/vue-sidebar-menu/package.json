@@ -1,0 +1,100 @@
+{
+  "_from": "vue-sidebar-menu@next",
+  "_id": "vue-sidebar-menu@5.1.2",
+  "_inBundle": false,
+  "_integrity": "sha512-7W67HZWLrvwlosXHeEXFfH1qw+OHzw0MfRfuLG/Ym1NoxwCqqC4gzfT7/YS2uOZTQvqgV4UDntpD6ybPtQWEAg==",
+  "_location": "/vue-sidebar-menu",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "vue-sidebar-menu@next",
+    "name": "vue-sidebar-menu",
+    "escapedName": "vue-sidebar-menu",
+    "rawSpec": "next",
+    "saveSpec": null,
+    "fetchSpec": "next"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/vue-sidebar-menu/-/vue-sidebar-menu-5.1.2.tgz",
+  "_shasum": "cd109c7217bbe4207947309321d88f0dff7c8647",
+  "_spec": "vue-sidebar-menu@next",
+  "_where": "D:\\repo1117\\ShopStore",
+  "author": {
+    "name": "yaminncco",
+    "email": "yaminncco@gmail.com"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "bugs": {
+    "url": "https://github.com/yaminncco/vue-sidebar-menu/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "A Vue.js Sidebar Menu Component",
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@vue/compiler-sfc": "^3.1.1",
+    "autoprefixer": "^9.8.6",
+    "eslint": "^7.29.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-vue": "^7.11.1",
+    "rollup": "^2.52.2",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-postcss": "^3.1.8",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-vue": "^6.0.0",
+    "sass": "^1.35.1",
+    "vue": "^3.1.1"
+  },
+  "files": [
+    "dist",
+    "src",
+    "types"
+  ],
+  "homepage": "https://yaminncco.github.io/vue-sidebar-menu/",
+  "keywords": [
+    "vue",
+    "vue-component",
+    "vue-sidebar",
+    "vue-sidebar-menu",
+    "sidebar",
+    "sidebar-menu",
+    "admin-sidebar"
+  ],
+  "license": "MIT",
+  "main": "dist/vue-sidebar-menu.js",
+  "module": "dist/vue-sidebar-menu.esm.js",
+  "name": "vue-sidebar-menu",
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yaminncco/vue-sidebar-menu.git"
+  },
+  "scripts": {
+    "build:demo": "cd demo && npm run build",
+    "build:lib": "rollup -c rollup.config.js",
+    "dev": "cd demo && npm run dev",
+    "lint": "eslint --ext .js,.vue .",
+    "preview": "cd demo && npm run preview"
+  },
+  "types": "./types/index.d.ts",
+  "unpkg": "dist/vue-sidebar-menu.min.js",
+  "version": "5.1.2"
+}

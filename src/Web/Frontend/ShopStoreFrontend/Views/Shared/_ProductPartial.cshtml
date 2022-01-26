@@ -1,0 +1,39 @@
+﻿<link href="~/css/Frontend/Products/_ProductPartial.css" rel="stylesheet" />
+
+<div id="prodetailCard" data-id="@ViewBag.Id" class="mb-3" style="max-width: auto; width:auto; height:550px">
+    <div class="row no-gutters">
+        <div class="col-md-4">
+            <img id="prodetailCard-img" src="/img/products/images/" class="card-img" alt="...">
+            <div align="center" style="margin-top: 20px">
+                <div style="padding:15px 30px 15px 30px">
+                    <p id="pdType" class="l-grey" style="line-height:3px">商品類型：</p>
+                    <p id="pdPrice" class="l-grey">售價：NT$ </p>
+                    <input class="btn btn-sm btn-outline-primary" type="button" value="加到我的購物車" data-id="" onclick="AddtoCart(this)"/>
+                    <input class="btn btn-sm btn-outline-info" type="button" value="加入我的收藏" />
+                </div>                
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">                
+                <h5 id="prodetailCard-title" class="card-title"><b></b></h5>
+                <p id="prodetailCard-content" class="card-text" style="font-size: 15px">                    
+                </p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var data = $.grep(products.item, function(e){
+        return e.f_id == $('#prodetailCard').attr('data-id')
+    })
+    
+    var pd = data[0]
+
+    $('#prodetailCard-img').attr('src', `/img/products/images/${pd.f_picName}`)
+    $('#pdType').text(`商品類型： ${pd.categoryName}`)
+    $('#pdPrice').text(`售價：NT$ ${pd.f_price}`)
+    $('#prodetailCard-content').html(`${pd.f_content}`)
+</script>

@@ -1,0 +1,295 @@
+﻿#app{
+    /*background: black;*/
+    /*height: 100%;*/
+}
+
+
+h2{
+    font-size: 50px;
+}
+
+.mainInput {
+    margin: -15px -110px 0px 10px;
+    width: 200px;
+    font-size: 22px;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    border: none;
+
+
+    -moz-user-select: none; /*火狐*/
+    -webkit-user-select: none; /*webkit浏览器*/
+    -ms-user-select: none; /*IE10*/
+    -khtml-user-select: none; /*早期浏览器*/
+    user-select: none;    
+}
+
+.container {
+    margin-top: 60px;
+    height: calc(100vh - 100px);
+    position: relative;
+    /*width: 100%;*/
+    /*border: 1px solid black;*/
+    /*display: flex;    
+    justify-content: center;*/
+}
+
+.container .box{
+    /*background: black;*/
+    padding: 30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    height:calc(100vh - 200px);
+    margin-bottom: 20px;
+    overflow: auto;
+    
+    /*width: 500px;*/
+/*    display:flex;
+    flex-wrap:wrap;*/
+}
+
+.control-panel{
+    /*background-color: red !important;*/
+    display: flex;
+    /*justify-content: space-between;*/
+    border: none!important;
+
+}
+
+.control-panel:hover{
+    box-shadow: none !important;
+}
+
+.control-panel input{
+    font-size: 20px;
+    font-weight: 600;
+    padding: 8px;
+}
+
+.container .box .item {
+    margin-bottom: 20px;
+    border: 1px solid;
+    width: 25%;
+    animation: mymove 1s infinite;
+    -webkit-animation: mymove 2s;
+}
+
+    .container .box .item:hover {
+        transition: all 0.3s ease;
+        /*background-color: #b4b6cc;*/
+        box-shadow: 1px 1px 3px 2px rgba(20%,20%,40%,0.5) inset;
+    }
+
+.container .box .popmenu{
+    z-index: 1;
+    position: absolute;
+    height: 150px;
+    width: 120px;
+    left: 25px;    
+    top: 25px;    
+    
+    background-color: #fff;    
+    border: 1px solid black;
+    display: none;
+    overflow: auto;
+}
+
+.container .box .popmenu .bx{
+    font-size: 35px;
+    width: 30px;
+    height: 20px;
+
+    transform: scale(1,1); transition: all 0.1s ease-out;
+}
+
+.container .box .popmenu .bx:hover{    
+    transform: scale(1.2, 1.2)
+}
+
+.container .box .title {
+    display: flex;
+    margin: 10px auto 0 10px;
+    position: relative;
+}
+
+    .container .box .title p {        
+        margin-left:10px;
+        margin-bottom: 0 !important;
+        cursor:pointer;
+    }
+
+    .container .box .title i{
+        margin-top:4px;
+        margin-right:10px;
+        font-size:25px;
+        cursor: pointer;
+    }
+
+    .container .box .title i:nth-last-child(1){
+        margin-left: 100px;
+        cursor: pointer;
+        display: none;
+    }
+
+        .container .box .title i:nth-last-child(1):active {
+            padding:1px;
+        }
+
+        .container .content{
+            display: none;
+        }
+
+        .container .content p {
+            font-size: 18px;
+            margin-bottom: 10px;
+            margin-left: 70px;
+        }
+
+    .container .content .rowx {
+        display: flex;
+        flex-wrap: nowrap;
+        font-size: 8px !important;        
+    }
+
+        .container .content .rowx input {
+            margin: 5px 60px 5px 73px;
+            /*color: red;*/
+            width: 120px;
+            font-size: 18px;
+            background-color: transparent;
+            outline: none;
+            border: none;            
+        }
+
+
+        .container .content .rowx span{
+            font-size:18px;
+            margin: 5px 100px 5px 75px;
+            cursor: pointer;
+            width:80px;
+        }
+
+
+
+            .container .content .rowx i {
+                /*margin-top:3px;*/
+                margin: 8px 0 5px 0;
+                font-size: 20px;
+                color: lightgray;
+                cursor: pointer;
+            }
+
+        .container .content .rowx:hover {
+            /*background-color:lightgray;*/
+            box-shadow: 1px 1px 3px 2px rgba(20%,20%,40%,0.5) inset;
+            transition: all 0.3s ease;
+        }
+
+        .container .content .rowx i:hover {
+            color: black;
+        }
+
+            .container .content .rowx i:active{
+                padding:1px;
+            }
+
+            .del input {
+                text-decoration-line: line-through;
+                color: lightgray;
+            }
+
+            .container .content {
+            }
+
+    .container .box hr {
+        margin-top: 0px;
+        margin-bottom: 10px;
+        /*width: 500px;*/
+    }
+
+.right-section{
+    height: 70%;
+    width: 70%;
+    border: 1px solid black;
+    position: absolute;
+    top: 140px;
+    right: 30px;
+}
+
+
+/* Add this attribute to the element that needs a tooltip */
+
+    [data-tooltip] {
+        position: relative;
+        z-index: 2;
+        cursor: pointer;
+    }
+
+    /* Hide the tooltip content by default */
+
+    [data-tooltip]:before,
+    [data-tooltip]:after {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    /* Position tooltip above the element */
+
+    [data-tooltip]:before {
+        position: absolute;
+        top: 0px;
+        left: 160px;
+        margin-bottom: 5px;
+        margin-left: -80px;
+        padding: 7px;
+        width: 180px;
+        border-radius: 3px;
+        background-color: #000;
+        /*background-color: red;*/
+        /*background-color: hsla(0, 0%, 20%, 0.9);*/
+        color: #fff;
+        content: attr(data-tooltip);
+        text-align: center;
+        font-size: 14px;
+        line-height: 1.2;
+    }
+
+    /* Triangle hack to make tooltip look like a speech bubble */
+
+    [data-tooltip]:after {
+        position: absolute;
+        top: 5px;
+        left: 75px;
+        margin-left: -5px;
+        width: 0;
+
+        border-right: 10px solid #000;
+        /*border-right: 10px solid hsla(0, 0%, 20%, 0.9);*/
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        content: " ";
+        font-size: 0;
+        line-height: 0;
+    }
+
+    /* Show tooltip content on hover */
+
+    [data-tooltip]:hover:before,
+    [data-tooltip]:hover:after {
+        visibility: visible;
+        opacity: 1;
+    }
+
+
+@keyframes mymove {
+    from {
+        background-color: #00A100;
+    }
+
+    to {
+        background-color: transparent;        
+    }
+}

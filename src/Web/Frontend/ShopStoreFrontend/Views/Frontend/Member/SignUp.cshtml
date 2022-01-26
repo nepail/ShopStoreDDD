@@ -1,0 +1,141 @@
+﻿@model ShopStoreFrontend.Domain.ViewModels.MemberViewModel
+
+<link href="~/css/Frontend/Member/SignUp.css" rel="stylesheet" type="text/css" />
+
+<div class="col-md-10 mx-auto py-4">
+    <div>
+        <div>
+            <div>
+                <h4>註冊</h4>
+                <hr />
+                <!--登入的 step progress bar-->
+                <div class="containter">
+                    <div class="progress-container">
+                        <div class="progress" id="progress"></div>
+                        <div class="circle active">1</div>
+                        <div class="circle">2</div>
+                        <div class="circle">3</div>                        
+                    </div>
+                </div>
+            </div>
+            <div id="formArea" style="height: 600px">
+                <form enctype="multipart/form-data" asp-controller="Member" asp-action="AddNewMember">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="f_account" class="control-label" required></label>
+                                <input asp-for="f_account" class="form-control" />
+                                <span asp-validation-for="f_account" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="f_pcode" class="control-label" required></label>
+                                <input asp-for="f_pcode" class="form-control" />
+                                <span asp-validation-for="f_pcode" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="ConfirmPassword" class="control-label" required></label>
+                                <input asp-for="ConfirmPassword" class="form-control"/>
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="f_name" class="control-label" required></label>
+                                <input id="inputRealName" asp-for="f_name" class="form-control" />
+                                <span asp-validation-for="f_name" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="f_nickname" class="control-label" required></label>
+                                <input id="inputRealName" asp-for="f_nickname" class="form-control" />
+                                <span asp-validation-for="f_nickname" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="f_phone" class="control-label" required></label>
+                                <input asp-for="f_phone" class="form-control" />
+                                <span asp-validation-for="f_phone" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="f_mail" class="control-label" required></label>
+                                <input asp-for="f_mail" class="form-control" />
+                                <span asp-validation-for="f_mail" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="f_address" class="control-label" required></label>
+                                <input asp-for="f_address" class="form-control" />
+                                <span asp-validation-for="f_address" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input class="btn btn-lg btn-primary" type="submit" value="註冊" style="display: none" />
+                    </div>
+                </form>                
+                <div id="send_mail">
+                    <div class="text-center mt-5">
+                        <img src="~/img/send_mail.png" />
+                        <div class="mt-5">
+                            <div id="timerVerify" class="timerStyle"></div>
+                            <h3>我們已發送了一封信件至您的信箱</h3>
+                            <p>請輸入您收到的認證碼</p>                            
+                            <input id="verifyInput" class="btn-block text-center form-control" />
+                            <button id="verifyBtn" class="btn btn-outline-primary btn-block">認證</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="registerSuccess">
+                    <div class="text-center mt-5">
+                        <img src="~/img/1_7.jpg" />
+                        <div class="mt-5">
+                            <h3>註冊成功</h3>
+                            <p><div id="timerRedirected" class="timerStyle"></div> 秒後跳轉至登入頁面</p>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-container">
+                <button class="btnv" id="prev" disabled style="display:none">上一步</button>
+                <button class="btnv" id="next" style="display:none">下一步</button>
+                <button class="btnv" id="verify" >下一步</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/js/Frontend/Member/SignUp.js" type="text/javascript" asp-append-version="true"></script>
+}

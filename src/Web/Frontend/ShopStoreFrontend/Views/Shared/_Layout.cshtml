@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShopStore</title>
+    <link href="~/js/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/Frontend/Home/_Layout.css" asp-append-version="true" rel="stylesheet" />
+    <link href="~/js/lib/slick-carousel/slick.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/js/lib/slick-carousel/slick-theme.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/js/lib/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" />
+
+</head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container" style="z-index: 1;">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ShopStore</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <ul class="navbar-nav flex-grow-1">
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="ProductList" asp-route-type="0">熱門商品</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="ProductList" asp-route-type="1">3C 商城</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="ProductList" asp-route-type="2">生活家電</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="ProductList" asp-route-type="3">中文圖書</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="ProductList">戶外旅行</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark"></a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark"></a>
+                            </li>
+
+                            @{
+                                if (!User.Identity.IsAuthenticated)
+                                {
+                                    <li class="nav-item" style="float:right">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Member" asp-action="SignUp">註冊</a>
+                                    </li>
+
+                                    <li class="nav-item" style="float:right">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Member" asp-action="Login">登入</a>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li class="nav-item" style="float:right">
+                                        <a class="nav-link text-dark" asp-controller="Member" asp-action="Logout">登出</a>
+                                    </li>
+
+                                    <partial name="_CartPartial.cshtml" />
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+        </header>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="main-footer">
+                <div class="footer-item">
+                    <h4></h4>
+                    <nav>
+                        <a href="#"><i class="fa fa-angle-right"></i> </a>
+                        <a href="#"><i class="fa fa-angle-right"></i> </a>
+                        <a href="#"><i class="fa fa-angle-right"></i> </a>
+                    </nav>
+                </div>
+            </div>
+        </footer>
+
+        <script src="~/js/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/js/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="~/js/lib/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="~/js/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+        <script src="~/js/lib/slick-carousel/slick.min.js"></script>
+        <script src="~/js/lib/bootstrap-sweetalert/sweetalert.js"></script>
+        <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+        <script src="~/js/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+
+        <style>
+            .ck-editor__editable {
+                min-height: 500px;
+            }
+        </style>
+
+        <script src="~/js/Frontend/Shared/_Layout.js" type="text/javascript" asp-append-version="true"></script>
+        <script src="~/js/Frontend/Shared/_MainProperties.js" type="text/javascript" asp-append-version="true"></script>
+        @{
+            //用戶登入後建立長連接
+            if (User.Identity.IsAuthenticated)
+            {
+                <script>
+                    //呼叫SW建立長連接
+                     Layout.SW.Remote.RemoteServiceWorker(null, 'CreateServerHub');
+                     //檢查User未讀訊息                 
+                     Layout.DATA.CheckUserAlert();
+
+                </script>
+            }
+            else
+            {
+                //用戶登出
+                <script>
+                    Layout.SW.Remote.StopServerHub();
+                </script>
+            }
+        }
+        @RenderSection("Scripts", required: false)
+    </body>
+</html>

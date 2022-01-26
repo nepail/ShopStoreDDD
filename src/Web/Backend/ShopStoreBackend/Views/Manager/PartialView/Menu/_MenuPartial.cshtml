@@ -1,0 +1,97 @@
+﻿@using ShopStoreBackend.Domain.Models
+@model List<MenuModel>
+
+<div class="container">
+    <h4>菜單管理</h4>
+    <div class="control-panel">
+        <input id="btnAdd" type="button" value="新增選單" onclick="AddMenu()" />
+        <input id="btnSave" type="button" value="保存" data-tooltip="保存" onclick="SendData(this)" disabled/>
+    </div>
+
+    <div class="box">
+
+        @foreach (var item in Model)
+        {
+            @if (item.f_issys == 1)
+            {
+
+            }
+            else
+            {
+                <div class="item">
+                    <div class="title">
+                        <i class='bx @item.f_icon'></i>    
+                        <div class="popmenu">
+                            <i class='bx bx-basket'></i>
+                            <i class='bx bx-male'></i>
+                            <i class='bx bx-windows'></i>                            
+                            <i class='bx bx-square' ></i>
+                            <i class='bx bx-bookmarks' ></i>
+                            <i class='bx bx-bug' ></i>
+                            <i class='bx bx-calendar' ></i>
+                            <i class='bx bx-envelope' ></i>
+                            <i class='bx bx-shield-quarter' ></i>
+                            <i class='bx bx-user' ></i>
+                            <i class='bx bx-bar-chart-alt' ></i>
+                            <i class='bx bx-task' ></i>
+                            <i class='bx bx-spreadsheet' ></i>
+                            <i class='bx bx-slideshow' ></i>
+                            <i class='bx bxs-briefcase-alt' ></i>
+                            <i class='bx bx-paperclip' ></i>
+                            <i class='bx bx-server' ></i>
+                            <i class='bx bx-note' ></i>
+                            <i class='bx bx-scatter-chart' ></i>
+                            <i class='bx bx-line-chart' ></i>
+                        </div>
+                        <div class="edit">
+                            @*<p>@item.f_name</p>*@
+                            <input class="mainInput" type="text" value="@item.f_name" placeholder="請輸入..." disabled/>
+                        </div>
+
+                        @if (item.f_issys != 1)
+                        {
+                            <i class='bx bx-add-to-queue' style="position:relative;"><span data-tooltip="新增子選單" style="position:absolute; left:10px; color:rgba(0,0,0,0);">1</span></i>                            
+                        }
+                    </div>
+
+                    <div class="content" data-menuid="@item.f_id">
+                        <hr />
+
+                        @foreach (var sub in item.MenuSubModels)
+                        {
+                            @if (sub.f_isopen == 1 || sub.f_issys == 1)
+                            {
+                                @if (sub.f_issys == 1)
+                                {
+                                    <div class="rowx">
+                                        <input type="text" value="@sub.f_name" disabled />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="rowx">
+                                        <input type="text" data-id="@sub.f_id" value="@sub.f_name" placeholder="請輸入..." />
+                                        @*<i class='bx bx-minus-circle' onclick="RemoveSelf(this)"></i>*@
+                                        <i class='bx bx-show' onclick="RemoveSelf(this)"></i>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                /*isopen = 0 被隱藏的項目*/
+                                <div class="rowx del">
+                                    <input type="text" data-id="@sub.f_id" value="@sub.f_name" placeholder="請輸入..." disabled/>
+                                    <i class='bx bx-hide' onclick="RemoveSelf(this)"></i>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        }
+        <div class="right-section"></div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/css/Manager/Menu/_MenuPartial.css" />
+<script type="text/javascript" src="~/js/Manager/Menu/_MenuPartial.js" asp-append-version="true"></script>

@@ -1,0 +1,160 @@
+﻿@using ShopStoreBackend.Domain.Models
+@model List<MenuModel>
+
+@{
+    Layout = null;
+    ViewData["Title"] = "管理後台";
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/vendor/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/vendor/bootstrap-vue/dist/bootstrap-vue.min.css" />
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/Manager/Home/Home.css" />
+    <link href="~/lib/bootstrap-sweetalert/sweetalert.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap-sweetalert/sweetalert.js"></script>
+    <script src="~/vendor/vue/dist/vue.js"></script>
+    <script src="~/vendor/bootstrap-vue/dist/bootstrap-vue.min.js"></script>
+    <script src="~/vendor/axios/dist/axios.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
+    <title>ShopStore 後台管理系統</title>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo-details">
+            <i id="btnHome" class="bx bxl-c-plus-plus"></i>
+            <span class="logo_name">ShopStore <br>Manage System</span>
+        </div>
+
+        <ul class="nav-links">
+
+            @foreach (var a in Model)
+            {
+                <li>
+                    <div class="icon-link">
+                        <a href="#">
+                            <i class='bx @a.f_icon'></i>
+                            <span class="link_name">@a.f_name</span>
+                            <i class="bx bxs-chevron-down"></i>
+                        </a>
+                    </div>
+                    <ul class="sub-menu" parent-id="@a.f_id">
+                        @foreach (var b in a.MenuSubModels)
+                        {
+                            @if (b.f_isopen == 1)
+                            {
+                                <li><a href="#" data-controller="@b.f_controller">@b.f_name</a></li>
+                            }
+                        }
+                    </ul>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <section class="home-section">
+        <nav>
+            <div class="sidebar-button" type="button">
+                <i class="bx bx-menu"></i>
+                <span class="dashboard">DashBoard</span>
+            </div>
+        </nav>
+
+        <div id="app">
+            <div id="Home-container" class="Home-container">
+                <div id="loading-section" class="loading">
+                    
+                    <span class="loading__anim"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="chatbox">
+        <div id="chatbox-support" class="chatbox__support">
+
+            <div class="chat-container">
+                <div class="chat-room">
+                    <div class="wrapper">
+
+
+
+                        <section id="main-chat" class="users">
+                            <header>
+                                <div class="content">
+                                    <!-- <img src="#" alt=""> -->
+                                    <div class="user-img">
+                                        <span>C</span>
+                                    </div>
+                                    <div class="details">
+                                        <span id="chat-username"></span>
+                                        <p>上線中</p>
+                                    </div>
+                                </div>
+                                
+                            </header>
+                            <div class="search">
+                                <span class="text">Select an user to start chat</span>
+                                <input type="text" placeholder="Enter name to search...">
+                                <button><i class="fas fa-search"></i></button>
+                            </div>
+                            <div id="users-list" class="users-list">
+                             
+                            </div>
+                        </section>
+
+
+                        <section id="sub-chat" class="chat-area">
+                            <header>
+                                <a href="#" class="bacl-icon">
+                                    <i id="prevToChatList" class="fas fa-arrow-left"></i>
+                                </a>
+                                <div class="user-img">
+                                    <span id="chat-box-user-firstName">C</span>
+                                </div>
+                                <div class="details">
+                                    <span id="chat-box-user-name"></span>
+                                    <p>Active now</p>
+                                </div>
+                            </header>
+                            <div id="chat-box" class="chat-box">
+
+                            </div>
+                            <form action="#" class="typing-area">
+                                <input type="text" placeholder="輸入訊息...">
+                                <button id="btnSendToChat"><i class="fab fa-telegram-plane"></i></button>
+                            </form>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="chatbox__button">
+            <button>
+                <img src="~/img/svg/chatbox-icon.svg" />
+            </button>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/Manager/Shared/_MainProperties.js" type="text/javascript" asp-append-version="true"></script>
+<script src="~/js/Manager/Home/Home.js" type="text/javascript" asp-append-version="true"></script>
+
+@section scripts{
+
+
+}

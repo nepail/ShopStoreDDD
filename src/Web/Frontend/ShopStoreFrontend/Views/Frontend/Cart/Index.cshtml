@@ -1,0 +1,123 @@
+﻿@model List<ShopStoreFrontend.Domain.ViewModels.CartItem>
+
+<div style="margin-top: 30px">
+    <h3>購物車</h3>
+    <hr />
+    <div class="table-responsive" style="margin-bottom: 60px; box-shadow: 0px 4px 10px gray;">
+        <div id="prodetail" style="display:none">
+            <div id="prodetailContent"></div>
+            <div class="text-center">
+                <a href="javascript: void(0)" onclick="showProductDetail()">回到購物車</a>
+            </div>
+        </div>
+        <table id="cartList" class="table table-striped table-hover table-bordered ">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">名稱</th>
+                    <th class="text-center" scope="col">價格</th>
+                    <th scope="col"></th>
+                    <th class="text-center" scope="col">小計</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        if (item.IsOpen == 0)
+                        {
+                            <tr id="item_@item.Product.f_id">
+
+                                <td align="center" class="align-middle">
+                                    <img type="button" src="@Url.Content($"~/img/products/images/{item.Product.f_pId}.jpg")" style="width: 150px; align-items:center" />
+                                </td>
+                                <td class="align-middle">
+                                    <a><del>@item.Product.f_name</del></a><br>
+                                    <b style="color: red">商品已暫時下架</b>
+                                </td>
+                                <td align="center" class="align-middle">
+                                    NT$
+                                    <span class="txtUniPrice"><del>@item.Product.f_price</del></span>
+                                </td>
+                                <td align="center" class="align-middle" style="width: 250px;">
+                                    <input style="width:30px; display:inline" type="button" class="btn btn-outline-primary" value="-" onclick="minus('#item_@item.Product.f_id')" disabled />
+                                    <input style="width:50px; display:inline; color:black;" type="text" class="btn btn-outline-primary" onchange="inputRecalculate(this.value, '#item_@item.Product.f_id')" value="@item.Amount" disabled />
+                                    <input style="width:30px; display:inline" type="button" class="btn btn-outline-primary" value="+" onclick="add('#item_@item.Product.f_id')" disabled />
+                                </td>
+                                <td align="center" class="align-middle">
+                                    NT$
+                                    <span class="txtSubTotal" onchange="subTotalRecalculate()">@item.SubTotal</span>
+                                </td>
+                                <td align="center" class="align-middle">
+                                    <input class="btn btn-outline-danger" data-id="@item.Product.f_id" type="button" value="刪除" onclick="btnDelItem(this)" />
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr id="item_@item.Product.f_id">
+
+                                <td align="center" class="align-middle"><img type="button" src="@Url.Content($"~/img/products/images/{item.Product.f_pId}.jpg")" style="width: 150px; align-items:center" /></td>
+                                <td class="align-middle"><a href="javascript: void(0)" onclick="showProductDetail('@item.Product.f_name', '@item.Product.f_id')">@item.Product.f_name</a></td>
+                                <td align="center" class="align-middle">NT$ <span class="txtUniPrice">@item.Product.f_price</span></td>
+                                <td align="center" class="align-middle" style="width: 250px;">
+                                    <input style="width:30px; display:inline" type="button" class="btn btn-outline-primary" value="-" onclick="minus('#item_@item.Product.f_id')" />
+                                    <input style="width:50px; display:inline; color:black;" type="text" class="btn btn-outline-primary" onchange="inputRecalculate(this.value, '#item_@item.Product.f_id')" value="@item.Amount" />
+                                    <input style="width:30px; display:inline" type="button" class="btn btn-outline-primary" value="+" onclick="add('#item_@item.Product.f_id')" />
+                                </td>
+                                <td align="center" class="align-middle">NT$ <span class="txtSubTotal" onchange="subTotalRecalculate()">@item.SubTotal</span></td>
+                                <td align="center" class="align-middle"><input class="btn btn-outline-danger" data-id="@item.Product.f_id" type="button" value="刪除" onclick="btnDelItem(this)" /></td>
+                            </tr>
+                        }
+                    }
+                    <tr id="trTotal">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="right">
+                            <span style="display: block;"><u>總計</u></span>
+                        </td>
+                        <td align="center">
+                            NT$ <span id="cartTotal"></span>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+
+                    <tr id="trCheckOut">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td align="center">
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td align="center" colspan="6">您的購物車是空的！</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+@if (Model != null)
+{
+    <div id="btnCheckOut" align="center">
+        <input class="btn btn-lg btn-primary" type="button" value="成立訂單" style="display:block" onclick="orderIn()" />
+    </div>
+}
+
+@section scripts{
+    <script type="text/javascript" src="~/js/Frontend/Cart/Index.js" asp-append-version="true"></script>
+}
+

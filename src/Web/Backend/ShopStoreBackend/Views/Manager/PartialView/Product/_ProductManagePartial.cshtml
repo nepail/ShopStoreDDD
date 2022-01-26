@@ -1,0 +1,93 @@
+﻿<link rel="stylesheet" href="~/css/Manager/Product/_ProductManagePartial.css" />
+<script type="text/javascript" src="~/js/Manager/Product/_ProductManagePartial.js" asp-append-version="true"></script>
+<script type="text/javascript" src="~/lib/phuong-jqueryInlineEdit-3a3b5ba/src/jquery.autoresize.js"></script>
+<script type="text/javascript" src="~/lib/phuong-jqueryInlineEdit-3a3b5ba/src/jquery.inline-edit.js"></script>
+
+<div id="searchBox">
+    <input id="searchInput" type="search" class="light-table-filter" data-table="product-table" placeholder="搜尋..." />
+</div>
+
+<div id="plist">
+    <div id="plist-sub">
+        <h4>商品庫存管理</h4>
+        <hr />
+
+    </div>
+    <div id="plist-table" class="product-table">
+        <table class="table table-hover table-borderless">
+            <thead>
+                <tr class="table-hover">
+                    @*<th scope="col">#</th>*@
+                    <th scope="col">名稱</th>
+                    <th scope="col">價格</th>
+                    <th scope="col">類別</th>
+                    <th scope="col">庫存量</th>
+                    <th scope="col">狀態</th>
+                    <th scope="col">加入時間</th>
+                </tr>
+            </thead>
+            <tbody id="productTable">
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+
+<div id="showP">
+
+    <div id="container">
+        <div id="uploadImg" class="item" style="background-color: #fff;">
+            <img id="itemImg" src="" />
+            <input accept="image/*" type="file" class="custom-file-input" id="customFile" data-val="true" data-val-required="請上傳圖片" name="ProductPic">
+        </div>
+        <div class="item" style="margin-bottom:0.4rem !important;">
+
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm">名稱</span>
+                <input id="itemName" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
+
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm">售價</span>
+                <input id="itemPrice" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
+
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm">類別</span>                    
+                <select id="selectForm" class="form-select" aria-label="Default select example">
+                    <option selected>請選擇</option>
+                </select>
+            </div>
+
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm">庫存量</span>
+                <input id="itemStock" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+            </div>
+
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-sm">商品描述</span>
+                <input id="itemDescription" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" />
+            </div>
+
+            <!-- Button trigger modal -->
+            <div class="checkbox">
+                <input id="click" type="checkbox" />
+                <label for="click" class="text"></label>
+                <div>                    
+                    <button id="btnSave" class="btn btn-outline-primary">保存</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <hr />
+    <div id="showP-content">
+
+        <textarea id="editor"></textarea>
+
+    </div>
+</div>
+

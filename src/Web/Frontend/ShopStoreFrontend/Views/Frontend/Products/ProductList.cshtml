@@ -1,0 +1,156 @@
+﻿@using Microsoft.Extensions.Configuration
+@model List<ShopStoreFrontend.Domain.ViewModels.ProductsViewModel>
+@inject IConfiguration Config
+@{
+    bool isLogin = User.Identity.IsAuthenticated;
+}
+
+<div class="single-item" style="margin-bottom: 60px">
+    <div><img src="/img/slider/01.jpg" alt=""></div>
+    <div><img src="/img/slider/02.jpg" alt=""></div>
+    <div><img src="/img/slider/03.jpg" alt=""></div>
+    <div><img src="/img/slider/04.jpg" alt=""></div>
+    <div><img src="/img/slider/05.jpg" alt=""></div>
+</div>
+
+<input type="text" id="searchInput" onkeyup="Product.SearchProducts()" placeholder="搜尋商品..." />
+<div class="sort_list" style="float:right; width:100%">
+    <select id="drpSortList" class="form-control" onchange="Product.SortChange()" style="width: 120px; text-align:center; float:right;">
+        <option value="0">--排序--</option>
+        <option value="1">--名稱--</option>
+        <option value="2">--價格--</option>
+        <option value="3">--熱門--</option>
+    </select>
+    <img src="~/img/sort.png" width="40" style="float:right" />
+</div>
+
+
+<div id="subNav" style="display: none">
+    <span type="button" onclick="Product.ShowProductDetail()"><u>商品列表</u></span>
+    >
+    <span type="button"><u id="navItemName"></u></span>
+</div>
+
+<div class="row" id="productList">
+    @foreach (var product in @Model)
+    {
+        <div class="card" data-id="card_@product.f_id">
+            <div class="card__image">
+                @*<img src="@Url.Content($"~/img/products/images/{product.f_pId}.jpg")" alt="" type="button" onclick="Product.ShowProductDetail('@product.f_name', '@product.f_pId')">*@
+                <img src="@Url.Content(@$"{Config["MinIO:AccessPath"]}img/{product.f_pId}.jpg")" alt="" type="button" onclick="Product.ShowProductDetail('@product.f_name', '@product.f_pId')">
+            </div>
+            <div class="card__contacts">
+                <div class="card-title">
+                    <h1>@product.f_name</h1>
+                    <input id="productPopularity" type="hidden" value="@product.f_id" />
+                </div>
+                <div class="card__info">
+                    <table id="productTable">
+                        <tr>
+                            <td class="l-grey">售價</td>
+                            <td class="pl-md">@product.f_price</td>
+                        </tr>
+                        <tr>
+                            <td class="l-grey">商品描述</td>                            
+                        </tr>
+
+                        <tr style="height:100px">
+                            <td colspan="2">@product.f_description</td>                            
+                        </tr>
+
+                        <tr>
+                            @if (isLogin)
+                            {
+                                <td style="width: 100px; height: 50px;">
+                                    <div style="width: 100%; height: 100%;">
+                                        <input class="btn btn-sm btn-outline-primary btn-block" type="button" data-id="@product.f_id" value="加入購物車" onclick="Product.AddtoCart(this, '@product.f_name')" />
+                                    </div>
+                                </td>
+                                <td style="width: 100px; height: 50px;">
+                                    <div style="width: 100%; height: 100%;">
+                                        <input class="btn btn-sm btn-outline-info btn-block" type="button" data-id="@product.f_id" value="加入我的最愛" onclick="Product.AddtoWishList(this)"/>
+                                    </div>
+                                </td>
+                            }
+                            else
+                            {
+                                <td style="width: 100px; height: 50px;">
+                                    <div style="width: 100%; height: 100%;">
+                                        <input class="btn btn-sm btn-outline-primary btn-block" type="button" data-id="@product.f_id" value="加入購物車" onclick="swal('請先登入','','info')" />
+                                    </div>
+                                </td>
+                                <td style="width: 100px; height: 50px;">
+                                    <div style="width: 100%; height: 100%;">
+                                        <input class="btn btn-sm btn-outline-info btn-block" type="button" data-id="@product.f_id" value="加入我的最愛" onclick="swal('請先登入','','info')" />
+                                    </div>
+                                </td>
+                            }
+
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <div class="card-bottom">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="cardmodal-@product.f_id" tabindex="-1" role="dialog" aria-labelledby="cardmodal-@product.f_id" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        
+                    </div>
+                    <hr />
+                    <p>@product.f_description</p>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div id="productDetail" style="display:none;">
+
+    <div id="prodetailCard" class="mb-3" style="max-width: auto; width:auto; height:550px">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img id="prodetailCard-img" src="" class="card-img" alt="...">
+                <div align="center" style="margin-top: 20px">
+                    <div id="prodetailCard-inline" style="padding:15px 30px 15px 30px">
+                        <p class="l-grey" style="line-height:3px">商品類型：<span></span></p>
+                        <p class="l-grey">售價：NT$ <span></span></p>
+                        <input class="btn btn-sm btn-outline-primary" type="button" value="加到我的購物車" data-id="Model.Id" onclick="Product.AddtoCart(this)" />
+                        <input class="btn btn-sm btn-outline-info" type="button" value="加入我的最愛" onclick="Product.AddtoWishList(this)" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 id="prodetailCard-title" class="card-title"><b>Model.Name</b></h5>
+                    <p id="prodetailCard-content" class="card-text" style="font-size: 15px">
+                        @*@Html.Raw(@Model.Content)*@
+                    </p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<link href="~/css/Frontend/Products/ProductList.css" rel="stylesheet" type="text/css" />
+<link href="~/css/Frontend/Products/_ProductPartial.css" rel="stylesheet" />
+
+@section scripts{
+    <script src="~/js/Frontend/Products/ProductList.js" type="text/javascript" asp-append-version="true"></script>
+}
