@@ -6,8 +6,8 @@
     })
 })
 
-var connection = new signalR.HubConnectionBuilder().withUrl('/chatHub').build();
-var serverHub = new signalR.HubConnectionBuilder().withUrl('/ServerHub').build();
+var connection = new signalR.HubConnectionBuilder().withUrl('http://localhost:5000/chatHub', { accessTokenFactory: () => localStorage.getItem('token') }).build();
+var serverHub = new signalR.HubConnectionBuilder().withUrl('http://localhost:5000/ServerHub', { accessTokenFactory: () => localStorage.getItem('token') }).build();
 
 const chatButton = $('.chatbox__button');
 const chatContent = $('.chatbox__support');

@@ -3,6 +3,9 @@
 /*
     描述:檔案儲存服務
     日期:2022-01-25    
+
+    描述:新增用戶讀取未讀訊息
+    日期:2022-01-26
     
  */
 
@@ -74,8 +77,8 @@ namespace ShopStoreFrontend.Domain.Service
         /// <summary>
         /// 讀取usermessage上的未讀訊息
         /// </summary>
-        /// <param name="account"></param>
-        /// <returns></returns>
+        /// <param name="account">會員帳號</param>
+        /// <returns>未讀訊息</returns>
         public async Task<string> ReadUserMsg(string account)
         {
             try
@@ -84,13 +87,14 @@ namespace ShopStoreFrontend.Domain.Service
                 var result = await MINIO.StatObjectAsync("usermessage", account + ".txt");
 
                 var memoryStream = new MemoryStream();
-
+                //將內容讀取到檔案流
                 await MINIO.GetObjectAsync("usermessage", account + ".txt", (stream) =>
                   {
                       stream.CopyTo(memoryStream);
                   });
 
                 memoryStream.Position = 0;
+                //讀取完以後刪除物件
                 await MINIO.RemoveObjectAsync("usermessage", account + ".txt");
                 return System.Text.Encoding.UTF8.GetString(memoryStream.ToArray());
             }

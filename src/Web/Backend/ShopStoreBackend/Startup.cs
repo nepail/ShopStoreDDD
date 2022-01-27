@@ -36,6 +36,7 @@ using System.Net.Http;
 using ShopStore.Models.Service;
 using ShopStoreBackend.Domain.Models.Interface;
 using ShopStoreBackend.Persistence.Service;
+using ShopStoreFrontend.Domain.Service;
 
 namespace ShopStore
 {
@@ -85,7 +86,8 @@ namespace ShopStore
 
             services.AddSingleton<HttpClient>();
             services.AddSingleton(e => new MinioClient(Configuration["MinIO:Endpoint"], Configuration["MinIO:AccessKey"], Configuration["MinIO:SecretKey"]));
-            services.AddSingleton<MinIOSVC>();
+            services.AddSingleton<ShopStoreBackend.Domain.Service.MinIOSVC>();
+            services.AddSingleton<ShopStoreBackend.Domain.Service.JwtSVC>();
 
             services.AddScoped<ActionFilter>();
             services.AddScoped<AuthorizationFilter>();

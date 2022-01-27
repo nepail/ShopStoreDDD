@@ -30,6 +30,7 @@ using ShopStoreBackend.Domain.Models.Manager.ViewModels;
 using ShopStoreBackend.Domain.Models.Manager.ViewModels.User;
 using ShopStoreBackend.Domain.Service;
 using ShopStoreBackend.Domain.ViewModels;
+using ShopStoreFrontend.Domain.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,9 +49,10 @@ namespace ShopStoreBackend.Controllers
         private readonly IDistributedCache REDIS;
         private readonly IWebHostEnvironment WEBHOSTENVIRONMENT;        
         private static readonly Logger LOGGER = LogManager.GetCurrentClassLogger();
-        private readonly MinIOSVC MINIOSVC;
+        private readonly Domain.Service.MinIOSVC MINIOSVC;
         private readonly IConfiguration CONFIG;
         private readonly HttpClient CLIENT;
+        private readonly Domain.Service.JwtSVC JWT;
 
         public ManagerController
         (
@@ -58,9 +60,10 @@ namespace ShopStoreBackend.Controllers
             IManager manager,
             IWebHostEnvironment webHostEnvironment,
             IDistributedCache redis,
-            MinIOSVC miniosvc,
+            Domain.Service.MinIOSVC miniosvc,
             IConfiguration config,
-            HttpClient httpClient
+            HttpClient httpClient,
+            Domain.Service.JwtSVC jwtSVC
         )
         {
             PRODUCTS = products;
@@ -70,6 +73,7 @@ namespace ShopStoreBackend.Controllers
             MINIOSVC = miniosvc;
             CONFIG = config;
             CLIENT = httpClient;
+            JWT = jwtSVC;
         }
 
         /// <summary>
@@ -107,6 +111,8 @@ namespace ShopStoreBackend.Controllers
                 new Claim(ClaimTypes.Role, user.GroupId.ToString()),
             };
 
+            var jwtToken = JWT.GenerateToken(user.Name);
+
             //防止重複登入
             string userGuid = Guid.NewGuid().ToString();
             Response.Cookies.Append(user.Account, userGuid);
@@ -121,7 +127,7 @@ namespace ShopStoreBackend.Controllers
                 new AuthenticationProperties { IsPersistent = false });
 
 
-            return Json(new { success = true, username = user.Name });
+            return Json(new { success = true, username = user.Name, jwtToken});
         }
 
         /// <summary>
