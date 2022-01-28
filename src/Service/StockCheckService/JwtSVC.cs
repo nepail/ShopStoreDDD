@@ -41,21 +41,16 @@ namespace ShopStoreWorkerService
             //對稱密鑰
             var signKey = "fkadsf;pdfddksssfq";
 
-            var claims = new List<Claim>();
-
-            claims.Add(new Claim(JwtRegisteredClaimNames.Sub, userName));
-            claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-            claims.Add(new Claim("type", "Worker"));
-
-            //claims.Add(new Claim("roles", "Admin"));
-            //claims.Add(new Claim("roles", "Users"));
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, userName),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim("type", "Worker")
+            };            
 
             var userClaimsIdentity = new ClaimsIdentity(claims, "Worker");
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signKey));
-            var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
-
-            //userClaimsIdentity.AuthenticationType = "manager";
-
+            var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);            
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

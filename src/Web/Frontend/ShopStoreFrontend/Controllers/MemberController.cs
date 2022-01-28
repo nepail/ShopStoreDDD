@@ -215,8 +215,6 @@ namespace ShopStore.Controllers
                 new Claim(ClaimTypes.Role, "Normal"),
             };
 
-
-
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
             var authProperties = new AuthenticationProperties

@@ -8,15 +8,15 @@
     },
     {
       "library": "slick-carousel@1.8.1",
-      "destination": "wwwroot/lib/slick-carousel/"
+      "destination": "wwwroot/js/lib/slick-carousel/"
     },
     {
       "library": "limonte-sweetalert2@11.1.10",
-      "destination": "wwwroot/lib/limonte-sweetalert2/"
+      "destination": "wwwroot/js/lib/limonte-sweetalert2/"
     },
     {
       "library": "bootstrap-sweetalert@1.0.1",
-      "destination": "wwwroot/lib/bootstrap-sweetalert/"
+      "destination": "wwwroot/js/lib/bootstrap-sweetalert/"
     },
     {
       "library": "bootstrap-vue@2.21.2",
@@ -25,7 +25,7 @@
     {
       "provider": "unpkg",
       "library": "@microsoft/signalr@latest",
-      "destination": "wwwroot/lib/microsoft/signalr/"
+      "destination": "wwwroot/js/lib/microsoft/signalr/"
     }
   ]
 }

@@ -29,6 +29,44 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopStoreWorkerService", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageService", "src\Service\MessageService\MessageService.csproj", "{EEF7FDC3-6D55-4F69-946E-8F1F11F1FBC9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MessageService", "MessageService", "{E5D0CB74-EC9D-40FF-9A40-52194E6D9BD4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{D2280C6B-449D-4EA1-A088-0819428513FB}"
+	ProjectSection(SolutionItems) = preProject
+		src\Database\ShoppingDB.ldf = src\Database\ShoppingDB.ldf
+		src\Database\ShoppingDB.mdf = src\Database\ShoppingDB.mdf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stored Procedure", "Stored Procedure", "{16CF4777-0726-41FE-942A-D9678230E7A9}"
+	ProjectSection(SolutionItems) = preProject
+		src\Database\Stored Procedure\dbo.pro_bg_addManagerMainMenu.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_addManagerMainMenu.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_addManagerSubMenu.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_addManagerSubMenu.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_addMenu.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_addMenu.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_addUser.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_addUser.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_checkProducts.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_checkProducts.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_delOrder.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_delOrder.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_delUser.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_delUser.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_editManagerSubMenu.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_editManagerSubMenu.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_editMemberAuth.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_editMemberAuth.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_editMemberLevel.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_editMemberLevel.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_editMemberPwd.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_editMemberPwd.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_editOrder.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_editOrder.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_editProduct.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_editProduct.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_editUserAuth.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_editUserAuth.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_getMembers.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_getMembers.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_getMenu.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_getMenu.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_getOrders.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_getOrders.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_getOrderSetting.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_getOrderSetting.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_getUserById.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_getUserById.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_getUsers.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_getUsers.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_bg_getUsersAuth.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_bg_getUsersAuth.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_fr_addMember.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_fr_addMember.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_fr_addProduct.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_fr_addProduct.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_fr_getMember.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_fr_getMember.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_fr_getMemberProfile.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_fr_getMemberProfile.StoredProcedure.sql
+		src\Database\Stored Procedure\dbo.pro_fr_getProducts.StoredProcedure.sql = src\Database\Stored Procedure\dbo.pro_fr_getProducts.StoredProcedure.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,7 +120,9 @@ Global
 		{27E1F035-606C-43CF-857D-FFC003047DA0} = {135CF9D4-2D2B-4EFE-9D39-F49FD0EA11E1}
 		{8C71893A-204C-4972-880A-ACFB4B84E6CA} = {135CF9D4-2D2B-4EFE-9D39-F49FD0EA11E1}
 		{85EC0D97-A610-40CB-95E2-4F151A2A3B06} = {B8467A53-5E2C-4B5F-B55D-E55A420EFBEE}
-		{EEF7FDC3-6D55-4F69-946E-8F1F11F1FBC9} = {E5C2AF5B-F4DA-4DE9-A7A9-2FE63547C71E}
+		{EEF7FDC3-6D55-4F69-946E-8F1F11F1FBC9} = {E5D0CB74-EC9D-40FF-9A40-52194E6D9BD4}
+		{E5D0CB74-EC9D-40FF-9A40-52194E6D9BD4} = {E5C2AF5B-F4DA-4DE9-A7A9-2FE63547C71E}
+		{16CF4777-0726-41FE-942A-D9678230E7A9} = {D2280C6B-449D-4EA1-A088-0819428513FB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {70E92A83-3D84-4E08-AEB0-42338E8B34C1}
