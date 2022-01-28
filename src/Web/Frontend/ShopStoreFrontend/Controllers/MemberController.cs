@@ -21,13 +21,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using NLog;
-using ShopStore.Common;
 using ShopStoreFrontend.Domain.Models.Interface;
 using ShopStoreFrontend.Domain.Service;
 using ShopStoreFrontend.Domain.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
 

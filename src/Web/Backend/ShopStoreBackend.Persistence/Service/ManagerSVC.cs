@@ -30,7 +30,7 @@ using System.Threading.Tasks;
 using static ShopStoreBackend.Domain.Models.Manager.OrderStatusModel;
 using static ShopStoreBackend.Domain.Models.Manager.PermissionDataModel;
 
-namespace ShopStore.Models.Service
+namespace ShopStoreBackend.Persistence.Service
 {
     public class ManagerSVC : IManager
     {
@@ -248,7 +248,7 @@ namespace ShopStore.Models.Service
             try
             {
                 using var conn = CONNECTION;
-                return (UserManageViewModels)conn.QueryFirstOrDefault<UserManageViewModels>("pro_bg_getUserById", new { userLogin.Account, userLogin.Pcode }, commandType: System.Data.CommandType.StoredProcedure);
+                return conn.QueryFirstOrDefault<UserManageViewModels>("pro_bg_getUserById", new { userLogin.Account, userLogin.Pcode }, commandType: System.Data.CommandType.StoredProcedure);
             }
             catch (Exception ex)
             {
@@ -352,7 +352,7 @@ namespace ShopStore.Models.Service
                 }
 
                 using var conn = CONNECTION;
-                return conn.Execute("pro_bg_editUserAuth", permissionModels, commandType: System.Data.CommandType.StoredProcedure) > 0;                
+                return conn.Execute("pro_bg_editUserAuth", permissionModels, commandType: System.Data.CommandType.StoredProcedure) > 0;
             }
             catch (Exception ex)
             {
@@ -465,6 +465,6 @@ namespace ShopStore.Models.Service
                 return null;
             }
         }
-        
+
     }
 }

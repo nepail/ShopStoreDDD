@@ -24,10 +24,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Minio;
-using ShopStore.Common;
-using ShopStore.Common.Filters;
 using ShopStoreFrontend.Domain.Models.Interface;
 using ShopStoreFrontend.Domain.Service;
+using ShopStoreFrontend.Filters;
 using ShopStoreFrontend.Persistence.Models.Service;
 using System.Data.SqlClient;
 using System.IO;
@@ -35,7 +34,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net.Http;
 
-namespace ShopStore
+namespace ShopStoreFrontend
 {
     public class Startup
     {
@@ -48,7 +47,7 @@ namespace ShopStore
 
         public void ConfigureServices(IServiceCollection services)
         {
-            double LoginExpireMinute = this.Configuration.GetValue<double>("LoginExpireMinute");
+            double LoginExpireMinute = Configuration.GetValue<double>("LoginExpireMinute");
             string connectionString = Configuration["SqlConStr"];
 
             services
@@ -71,11 +70,11 @@ namespace ShopStore
             services.AddTransient<IProducts, ProductsSVC>();
             services.AddTransient<IMembers, MembersSVC>();
             services.AddTransient<ICart, CartSVC>();
-            services.AddTransient<IOrders, OrderSVC>();            
+            services.AddTransient<IOrders, OrderSVC>();
             services.AddTransient(e => new SqlConnection(connectionString));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            
+
             services.AddSingleton<HttpClient>();
             services.AddSingleton(e => new MinioClient(Configuration["MinIO:Endpoint"], Configuration["MinIO:AccessKey"], Configuration["MinIO:SecretKey"]));
             services.AddSingleton<MinIOSVC>();
@@ -86,7 +85,7 @@ namespace ShopStore
             services.AddScoped<AuthorizationFilter>();
 
             //後台新增產品產生MD5碼呼叫 DataProtection API，需要加上這段加解密儲存空間，否則IIS會報錯
-            services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(@"D:\DataProtection\"));                 
+            services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(@"D:\DataProtection\"));
 
             services.AddSession(option =>
             {
@@ -161,7 +160,7 @@ namespace ShopStore
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}")
                 //啟用全域驗證
-                .RequireAuthorization();                
+                .RequireAuthorization();
             });
         }
     }

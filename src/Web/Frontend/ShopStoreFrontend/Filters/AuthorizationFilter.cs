@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Threading.Tasks;
 
-namespace ShopStore.Common.Filters
+namespace ShopStoreFrontend.Filters
 {
     public class AuthorizationFilter : IAsyncAuthorizationFilter
     {
