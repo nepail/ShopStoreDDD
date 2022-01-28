@@ -79,6 +79,7 @@ namespace ShopStore
             services.AddSingleton<HttpClient>();
             services.AddSingleton(e => new MinioClient(Configuration["MinIO:Endpoint"], Configuration["MinIO:AccessKey"], Configuration["MinIO:SecretKey"]));
             services.AddSingleton<MinIOSVC>();
+            services.AddSingleton<JwtSVC>();
 
 
             services.AddScoped<ActionFilter>();

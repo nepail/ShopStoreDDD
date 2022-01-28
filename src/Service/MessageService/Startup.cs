@@ -104,7 +104,7 @@ namespace MessageService
 
             app.Use(async (context, next) =>
             {
-                if (context.Request.Path.Value.StartsWith("/chatHub"))
+                if (context.Request.Path.Value.StartsWith("/chatHub") || context.Request.Path.Value.StartsWith("/ServerHub"))
                 {
                     var bearerToken = context.Request.Query["access_token"].ToString();
 

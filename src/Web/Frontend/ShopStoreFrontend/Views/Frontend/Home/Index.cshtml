@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    
 }
 
 <div class="text-center">
@@ -24,4 +25,7 @@
     </div>
 </div>
 
+<script>
+    localStorage.setItem('ftoken', `@TempData["Token"]`);
 
+</script>

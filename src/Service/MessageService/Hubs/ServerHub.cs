@@ -62,14 +62,16 @@ namespace MessageService.Hubs
                 //加入前台User
                 if (!CONUSERLIST.ServerList.Any(x => x.UserName == ClientName))
                 {
-                    var target = Context.User.Identities.FirstOrDefault(x => x.AuthenticationType == "Cookies");
-
+                    //var target = Context.User.Identities.FirstOrDefault(x => x.AuthenticationType == "Cookies");
+                    var target = Context.User.FindFirstValue("type");
                     if (target != null)
                     {
                         var user = new ConUserModel()
                         {
-                            UserAccount = target.Claims.FirstOrDefault(x => x.Type == "Account").Value,
-                            UserName = target.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value,
+                            //UserAccount = target.Claims.FirstOrDefault(x => x.Type == "Account").Value,
+                            UserAccount = Context.User.FindFirstValue("Account"),
+                            //UserName = target.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Name).Value,
+                            UserName = Context.User.Identity.Name,
                             ConnectionID = ClientID,
                             OnlineTime = DateTime.Now
                         };
@@ -101,45 +103,8 @@ namespace MessageService.Hubs
                 await Clients.Clients(target.ConnectionID).SendAsync("SendMessageToFrontedUser", orderId, stateMsg);
                 return;
             }
-
-            //在本機上暫存用戶通知
-            //StoredUserAlert(userAccount, orderId, stateMsg);
-        }
-
-        /// <summary>
-        /// 暫存用戶通知
-        /// </summary>
-        /// <param name="contentText"></param>
-        /// <param name="userAccount"></param>
-        //private void StoredUserAlert(string userAccount, string orderId, string stateMsg)
-        //{
-        //    string uploadFolder = Path.Combine(WEBHOSTENVIRONMENT.WebRootPath, "userAlert");
-        //    string filePath = Path.Combine(uploadFolder, userAccount + ".txt");
-        //    string now = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
-        //    using StreamWriter sw = File.AppendText(filePath);
-        //    sw.WriteLine($"{now},#{orderId},{stateMsg}");
-        //}
-
-        /// <summary>
-        /// 讀取文字檔(暫未使用)
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        //private string ReadProductContent(string id)
-        //{
-        //    string filePath = @$"{Path.Combine(WEBHOSTENVIRONMENT.WebRootPath, "content\\")}{id}.txt";
-        //    string contentTxt = null;
-
-        //    using StreamReader reader = new StreamReader(filePath);
-        //    if (File.Exists(filePath))
-        //    {
-        //        contentTxt = reader.ReadToEnd();
-        //    }
-
-        //    return contentTxt;
-        //}
-
+           
+        }      
 
         /// <summary>
         /// 向後台發送庫存量預警

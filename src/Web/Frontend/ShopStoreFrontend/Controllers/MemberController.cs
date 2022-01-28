@@ -42,6 +42,7 @@ namespace ShopStore.Controllers
         private readonly IHttpContextAccessor HTTPCONTEXTACCESSOR;
         private readonly IWebHostEnvironment WEBHOSTENVIRONMENT;
         private readonly MinIOSVC MINIOSVC;
+        private readonly JwtSVC JWTSVC;
 
         public MemberController
         (
@@ -49,7 +50,8 @@ namespace ShopStore.Controllers
             IDistributedCache redis, 
             IHttpContextAccessor httpContextAccessor, 
             IWebHostEnvironment webHostEnvironment,
-            MinIOSVC minIOSVC
+            MinIOSVC minIOSVC,
+            JwtSVC jwtSVC
         )
         {
             MEMBERS = members;
@@ -57,6 +59,7 @@ namespace ShopStore.Controllers
             HTTPCONTEXTACCESSOR = httpContextAccessor;
             WEBHOSTENVIRONMENT = webHostEnvironment;
             MINIOSVC = minIOSVC;            
+            JWTSVC = jwtSVC;
         }
 
 
@@ -247,6 +250,11 @@ namespace ShopStore.Controllers
             }
             else
             {
+                var token = JWTSVC.GenerateToken(member.f_nickname, member.f_account);
+
+                //ViewBag.Token = token;
+                //ViewData["Token"] = token;
+                TempData["Token"] = token;
                 return RedirectToAction("Index", "Home");
             }
         }

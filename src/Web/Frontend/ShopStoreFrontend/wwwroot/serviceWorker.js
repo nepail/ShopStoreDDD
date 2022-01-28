@@ -26,7 +26,7 @@ self.addEventListener('message', function (event) {
     var data = event.data;
 
     if (data.command == 'CreateServerHub') {
-        CreateServerHub(data.url);
+        CreateServerHub(data.url, data.token);
         messageChannel = event.ports;
 
     }
@@ -37,14 +37,14 @@ self.addEventListener('message', function (event) {
 })
 
 //建立長連接
-function CreateServerHub(url) {
+function CreateServerHub(url, token) {
 
     if (serverHub != undefined && serverHub.state == 'Connected') {           
         return;
     }
 
     serverHub = new signalR.HubConnectionBuilder()
-        .withUrl(url)
+        .withUrl(url, { accessTokenFactory: () => token })
         .build();
     
     serverHub.start().then(() => {        

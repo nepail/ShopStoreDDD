@@ -20,8 +20,8 @@ namespace ShopStoreFrontend.Domain.Service
 {
     public class JwtSVC
     {
-        private readonly IConfiguration CONFIG;
-
+        private readonly IConfiguration CONFIG;        
+        
         public JwtSVC(IConfiguration configuration)
         {
             CONFIG = configuration;
@@ -33,7 +33,7 @@ namespace ShopStoreFrontend.Domain.Service
         /// <param name="userName">使用者帳號</param>
         /// <param name="expireMinutes">過期時間</param>
         /// <returns></returns>
-        public string GenerateToken(string userName, int expireMinutes = 30)
+        public string GenerateToken(string userName,string userAccount, int expireMinutes = 30)
         {
             //var issuer = CONFIG
             //簽發者
@@ -41,22 +41,18 @@ namespace ShopStoreFrontend.Domain.Service
             //對稱密鑰
             var signKey = "fkadsf;pdfddksssfq";
 
-            var claims = new List<Claim>();
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, userName),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                //前台User
+                new Claim("type", "Cookies"),
+                new Claim("Account", userAccount)
+            };
 
-            claims.Add(new Claim(JwtRegisteredClaimNames.Sub, userName));
-            claims.Add(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()));
-            //前台User
-            claims.Add(new Claim("type", "Cookies"));
-
-            //claims.Add(new Claim("roles", "Admin"));
-            //claims.Add(new Claim("roles", "Users"));
-
-            var userClaimsIdentity = new ClaimsIdentity(claims, "manager");
+            var userClaimsIdentity = new ClaimsIdentity(claims, "Cookies");
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signKey));
             var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
-
-            //userClaimsIdentity.AuthenticationType = "manager";
-
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

@@ -162,7 +162,7 @@ var Layout = {
         //操作
         Remote: {
             //發送命令
-            RemoteServiceWorker(context, method) {
+            RemoteServiceWorker(context, method, token) {
 
                 if (navigator.serviceWorker.controller) {
 
@@ -178,11 +178,15 @@ var Layout = {
 
                     }
 
+                    console.log({ token });
+
                     //發送訊息至SW，同時挾帶 port2 使SW可以回傳訊息
                     navigator.serviceWorker.controller.postMessage({
                         'command': method,
                         'message': context,
-                        'url': window.location.origin + '/ServerHub'
+                        //'url': window.location.origin + '/ServerHub',
+                        'url': 'http://localhost:5000/ServerHub',
+                        'token': token
                     }, [messageChannel.port2]);
                 }
             },

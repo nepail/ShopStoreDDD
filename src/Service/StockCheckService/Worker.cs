@@ -2,10 +2,13 @@
 
 /*
     描述:Windows Service Worker
-    建立日期:2022-01-10
+    日期:2022-01-10
 
     描述:程式碼風格調整
-    修改日期:2022-01-21
+    日期:2022-01-21
+
+    描述:加入JwtToken Generator
+    日期:2022-01-21
 
  */
 
@@ -36,10 +39,7 @@ namespace ShopStoreWorkerService
         private StreamWriter CPULOGGER = null!;
         private readonly HubConnection CONNECTION;        
         private readonly string CONNSTR = "Data Source=localhost;Initial Catalog=ShoppingDB;User ID=shopstoreadmin;Password=pk!shopstoreadmin;Integrated Security=false;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        private readonly int CHECKTIME;
-        private readonly string DOMAINURL;
-        private readonly JwtSVC JWTSVC;
-
+        private readonly int CHECKTIME;                
 
         public Worker
         (
@@ -51,10 +51,7 @@ namespace ShopStoreWorkerService
             LOGGER = logger;
             LOGPATH = Path.Combine(config.GetValue<string>("LogPath") ?? AppContext.BaseDirectory!, "cpu2.log");           
             CONNECTION = new HubConnectionBuilder().WithUrl(config.GetValue<string>("DomainUrl"), options =>
-            {
-                //options.Cookies.Add(new System.Net.Cookie("manager", "123"));            
-
-
+            {                       
                 //產生Token
                 options.AccessTokenProvider = () => Task.FromResult(jwt.GenerateToken("Worker"));
 
@@ -76,13 +73,9 @@ namespace ShopStoreWorkerService
             //DomainUrl = config.GetValue<string>("DomainUrl");
         }
 
-        // 服務啟動時
+        //服務啟動
         public override async Task StartAsync(CancellationToken stoppingToken)
-        {
-
-            
-            //var con = new CookieContainer()
-            
+        {                                   
             CPULOGGER = new StreamWriter(LOGPATH, true);            
             await CONNECTION.StartAsync();
             LOGGER.LogInformation("connection successful");
