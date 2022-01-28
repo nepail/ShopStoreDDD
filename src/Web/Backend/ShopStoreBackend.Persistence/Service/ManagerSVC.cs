@@ -205,7 +205,7 @@ namespace ShopStoreBackend.Persistence.Service
         /// </summary>
         /// <param name="orders"></param>
         /// <returns></returns>
-        public bool editOrder(List<Order> orders)
+        public bool EditOrder(List<Order> orders)
         {
             try
             {

@@ -1,4 +1,13 @@
-﻿
+﻿#region 功能與歷史修改描述
+
+/*
+    描述:購物車介面
+    日期:2022-01-24
+
+ */
+
+#endregion
+
 using ShopStoreFrontend.Domain.ViewModels;
 using System.Collections.Generic;
 

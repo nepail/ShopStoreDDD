@@ -1,6 +1,4 @@
-﻿
-
-namespace ShopStoreBackend.Domain.ViewModels
+﻿namespace ShopStoreBackend.Domain.ViewModels
 {
     /// <summary>
     /// 購物車 ViewModel

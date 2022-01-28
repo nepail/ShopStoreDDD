@@ -117,7 +117,6 @@ namespace ShopStoreBackend.Domain.Service
             {
                 try
                 {
-
                     await MINIO.StatObjectAsync(targetBucketStr, x.Account + ".txt");
                     //物件存在
                     var fileName = x.Account + ".txt";
@@ -159,74 +158,7 @@ namespace ShopStoreBackend.Domain.Service
                     stream.Position = 0;
                     await MINIO.PutObjectAsync(targetBucketStr, @$"{x.Account}.txt", stream, stream.Length, "text/plain");
                 }
-            });
-
-
-            //var fileName = account + ".txt";
-            //var memoryStream = new MemoryStream();
-            
-            //string objContent;
-
-            //try
-            //{
-            //    //已存在
-            //    var result = await MINIO.StatObjectAsync(targetBucketStr, fileName);
-
-
-            //    await MINIO.GetObjectAsync(targetBucketStr, fileName, (stream) =>
-            //    {
-            //        stream.CopyToAsync(memoryStream);
-            //    });
-
-            //    memoryStream.Position = 0;
-
-            //    objContent = System.Text.Encoding.UTF8.GetString(memoryStream.ToArray());
-
-            //    List<UserAlert> userAlerts = new List<UserAlert>();
-            //    userAlerts = JsonSerializer.Deserialize<List<UserAlert>>(objContent);
-            //    userAlerts.Add(new UserAlert
-            //    {
-            //        AlertTime = DateTime.Now.ToString(),
-            //        OrderId = orderId,
-            //        StateMsg = msg,
-            //    });
-
-            //    var content = JsonSerializer.Serialize(userAlerts);
-
-            //    var stream = new MemoryStream();
-            //    using var writer = new StreamWriter(stream);
-            //    writer.Write(content);
-            //    writer.Flush();
-            //    stream.Position = 0;
-
-            //    await MINIO.PutObjectAsync(targetBucketStr, @$"{account}.txt", stream, stream.Length, "text/plain");
-
-
-            //}
-            //catch (MinioException e)
-            //{
-            //    //建立新的
-
-            //    List<UserAlert> userAlerts = new List<UserAlert>
-            //    {
-            //        new UserAlert
-            //        {
-            //            AlertTime = DateTime.Now.ToString(),
-            //            OrderId = orderId,
-            //            StateMsg = msg,
-            //        }
-            //    };
-
-            //    var content = JsonSerializer.Serialize(userAlerts);
-
-            //    var stream = new MemoryStream();
-            //    using var writer = new StreamWriter(stream);
-            //    writer.Write(content);
-            //    writer.Flush();
-            //    stream.Position = 0;
-            //    await MINIO.PutObjectAsync(targetBucketStr, @$"{account}.txt", stream, stream.Length, "text/plain");
-
-            //}
+            });           
         }
 
         public class UserAlert

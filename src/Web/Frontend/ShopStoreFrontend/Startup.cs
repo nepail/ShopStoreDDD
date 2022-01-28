@@ -74,14 +74,11 @@ namespace ShopStoreFrontend
             services.AddTransient(e => new SqlConnection(connectionString));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
             services.AddSingleton<HttpClient>();
             services.AddSingleton(e => new MinioClient(Configuration["MinIO:Endpoint"], Configuration["MinIO:AccessKey"], Configuration["MinIO:SecretKey"]));
             services.AddSingleton<MinIOSVC>();
-            services.AddSingleton<JwtSVC>();
-
-
-            services.AddScoped<ActionFilter>();
+            services.AddSingleton<JwtSVC>();      
+            
             services.AddScoped<AuthorizationFilter>();
 
             //後台新增產品產生MD5碼呼叫 DataProtection API，需要加上這段加解密儲存空間，否則IIS會報錯
@@ -95,8 +92,7 @@ namespace ShopStoreFrontend
 
             //加入自訂的授權過濾器
             services.AddMvc(option =>
-            {
-                option.Filters.Add<ActionFilter>();
+            {                
                 option.Filters.Add<AuthorizationFilter>();
             });
 
@@ -115,10 +111,7 @@ namespace ShopStoreFrontend
                 option.Level = (CompressionLevel)5;
             });
 
-            services.AddMemoryCache();
-
-            //SignalR 預設開啟JsonProtocol
-            services.AddSignalR().AddJsonProtocol();
+            services.AddMemoryCache();            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -132,16 +125,7 @@ namespace ShopStoreFrontend
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
-
-            //加入快取設定
-            //app.UseStaticFiles(new StaticFileOptions
-            //{
-            //    OnPrepareResponse = ctx =>
-            //    {
-            //        ctx.Context.Response.Headers[HeaderNames.CacheControl] = "public, max-age=86400";
-            //    }            
-            //});            
+            app.UseStaticFiles();         
 
             //啟用壓縮回應
             app.UseResponseCompression();

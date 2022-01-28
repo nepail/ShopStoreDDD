@@ -2,10 +2,10 @@
 
 /*
     描述:前台訂單資料庫
-    建立日期:2021-11-24
+    日期:2021-11-24
 
     描述:程式碼風格調整
-    修改日期:2022-01-07
+    日期:2022-01-07
 
  */
 
@@ -96,7 +96,6 @@ namespace ShopStoreFrontend.Persistence.Models.Service
 
             try
             {
-
                 string strSql =
                     @"update t_orders set f_status = 5, f_isdel = 1 where f_id = @f_id
                       update t_orderDetails set f_isdel = 1 where f_orderId = @f_orderId";

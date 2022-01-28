@@ -1,4 +1,14 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿#region 功能與歷史修改描述
+
+/*
+    描述:驗證用戶有效性，防止重複登入
+    日期:2022-01-25
+
+ */
+
+#endregion
+
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -10,24 +20,27 @@ namespace ShopStoreFrontend.Filters
 {
     public class AuthorizationFilter : IAsyncAuthorizationFilter
     {
-        private readonly IDistributedCache _cache;
+        private readonly IDistributedCache CACHE;
         public AuthorizationFilter(IDistributedCache cache)
         {
-            _cache = cache;
+            CACHE = cache;
         }
 
+        /// <summary>
+        /// 驗證用戶有效性，防止重複登入
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         async Task IAsyncAuthorizationFilter.OnAuthorizationAsync(AuthorizationFilterContext context)
         {
             if (context.HttpContext.User.Identity.IsAuthenticated)
             {
                 string userid = context.HttpContext.User.FindFirst("Account").Value;
-
-                var cookieUser = context.HttpContext.Request.Cookies[userid];
-                var cacheUser = _cache.GetString(userid);
-
-                if (!context.HttpContext.Request.Cookies[userid].Equals(_cache.GetString(userid)))
+                
+                if (!context.HttpContext.Request.Cookies[userid].Equals(CACHE.GetString(userid)))
                 {
                     string cookieType = context.HttpContext.User.Identity.AuthenticationType;
+
                     //藉由 AuthenticationType 判斷登入用戶
                     string controller = cookieType == "manager" ? cookieType : "Home";
 
@@ -41,37 +54,7 @@ namespace ShopStoreFrontend.Filters
                             {"action", "Index" }
                         });
                 }
-            }
-            //else
-            //{
-            //    //未登入用戶
-            //    var endpoint = context.HttpContext.GetEndpoint();
-
-            //    string action = context.HttpContext.Request.RouteValues["action"].ToString();
-            //    string controller = context.HttpContext.Request.RouteValues["controller"].ToString();
-
-            //    if (context.HttpContext.Request.RouteValues["action"].ToString() != "Index" || (controller != "Home" || controller != "Manager"))
-            //    {
-            //        //context.Result = new RedirectToRouteResult(
-            //        //        new RouteValueDictionary
-            //        //        {
-            //        //            {"controller", controller == "Manager"? controller: "Home" },
-            //        //            {"action", "Index" }
-            //        //        });
-
-            //        //context.Result = new RedirectResult("/Home");
-            //        //context.Result = new ChallengeResult(CookieAuthenticationDefaults.AuthenticationScheme);
-            //        context.Result = new ViewResult
-            //        {
-            //            ViewName = "Index"
-            //        };
-            //    }
-            //    else
-            //    {
-
-            //    }
-            //}
+            }            
         }
-
     }
 }

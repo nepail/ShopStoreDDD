@@ -1,4 +1,14 @@
-﻿using ShopStoreBackend.Domain.Models.Manager;
+﻿#region 功能與歷史修改描述
+
+/*
+    描述:後台管理介面
+    日期:2022-01-25
+
+ */
+
+#endregion
+
+using ShopStoreBackend.Domain.Models.Manager;
 using ShopStoreBackend.Domain.Models.Manager.ViewModels;
 using ShopStoreBackend.Domain.Models.Manager.ViewModels.Product;
 using ShopStoreBackend.Domain.Models.Manager.ViewModels.User;
@@ -57,7 +67,7 @@ namespace ShopStoreBackend.Domain.Models.Interface
         /// </summary>
         /// <param name="orders"></param>
         /// <returns></returns>
-        public bool editOrder(List<Order> orders);
+        public bool EditOrder(List<Order> orders);
 
         /// <summary>
         /// 新增後台帳號

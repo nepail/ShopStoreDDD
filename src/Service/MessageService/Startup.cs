@@ -1,3 +1,13 @@
+#region 功能與歷史修改描述
+
+/*
+    描述:Startup
+    日期:2022-01-27
+
+ */
+
+#endregion
+
 using MessageService.Hubs;
 using MessageService.Hubs.Models.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -42,31 +52,12 @@ namespace MessageService
                     RoleClaimType = ClaimTypes.Role,
 
                     //確保驗證權杖的應用程式信任用來簽署權杖的金鑰。 有一個特殊案例，其中的金鑰內嵌在權杖中。 但這種情況通常不會發生。
-                    ValidateIssuerSigningKey = true,
-                    //IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c")),
+                    ValidateIssuerSigningKey = true,                    
                     IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("fkadsf;pdfddksssfq")),
 
                     ValidateIssuer = false, // 不驗證簽發者
                     ValidateAudience = false  // 不驗證 Audience (Token接收方)
                 };
-
-                //options.Events = new JwtBearerEvents()
-                //{
-                //    OnMessageReceived = context =>
-                //    {
-                //        var accessToken = context.Request.Query["access_token"];
-
-                //        var path = context.HttpContext.Request.Path;
-                //        if(!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/chatHub"))
-                //        {
-                //            context.Token = accessToken;
-                //        }
-
-                //        return System.Threading.Tasks.Task.CompletedTask;
-                //    }
-                //};
-
-
             });
 
 
@@ -87,9 +78,7 @@ namespace MessageService
             else
             {
                 app.UseExceptionHandler("/Error");
-            }
-
-            //app.UseStaticFiles();
+            }            
 
             app.UseCors(builder =>
             {
@@ -101,7 +90,7 @@ namespace MessageService
                 .AllowCredentials();
             });
 
-
+            //將 QueryString 的 AccessToken 加入請求標頭中
             app.Use(async (context, next) =>
             {
                 if (context.Request.Path.Value.StartsWith("/chatHub") || context.Request.Path.Value.StartsWith("/ServerHub"))
@@ -114,7 +103,6 @@ namespace MessageService
 
                 await next();
             });
-
 
             app.UseAuthentication();
 

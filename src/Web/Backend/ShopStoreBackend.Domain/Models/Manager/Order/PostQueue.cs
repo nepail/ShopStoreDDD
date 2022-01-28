@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ShopStoreBackend.Domain.Models.Manager
+﻿namespace ShopStoreBackend.Domain.Models.Manager
 {
     public class PostQueue
     {

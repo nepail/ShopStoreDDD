@@ -1,4 +1,14 @@
-﻿using ShopStoreBackend.Domain.ViewModels;
+﻿#region 功能與歷史修改描述
+
+/*
+    描述:後台產品管理
+    日期:2022-01-25
+
+ */
+
+#endregion
+
+using ShopStoreBackend.Domain.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

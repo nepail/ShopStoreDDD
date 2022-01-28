@@ -71,15 +71,11 @@ namespace ShopStoreBackend
 
             services.AddControllersWithViews();
 
-            services.AddTransient<IProducts, ProductsSVC>();
-            //services.AddTransient<IMembers, MembersSVC>();
-            //services.AddTransient<ICart, CartSVC>();
-            //services.AddTransient<IOrders, OrderSVC>();
+            services.AddTransient<IProducts, ProductsSVC>();            
             services.AddTransient<IManager, ManagerSVC>();
             services.AddTransient(e => new SqlConnection(connectionString));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
             services.AddSingleton<HttpClient>();
             services.AddSingleton(e => new MinioClient(Configuration["MinIO:Endpoint"], Configuration["MinIO:AccessKey"], Configuration["MinIO:SecretKey"]));
             services.AddSingleton<Domain.Service.MinIOSVC>();
@@ -119,10 +115,7 @@ namespace ShopStoreBackend
                 option.Level = (CompressionLevel)5;
             });
 
-            services.AddMemoryCache();
-
-            //SignalR 預設開啟JsonProtocol
-            services.AddSignalR().AddJsonProtocol();
+            services.AddMemoryCache();            
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -137,15 +130,6 @@ namespace ShopStoreBackend
             }
 
             app.UseStaticFiles();
-
-            //加入快取設定
-            //app.UseStaticFiles(new StaticFileOptions
-            //{
-            //    OnPrepareResponse = ctx =>
-            //    {
-            //        ctx.Context.Response.Headers[HeaderNames.CacheControl] = "public, max-age=86400";
-            //    }            
-            //});
 
             app.UseStaticFiles(new StaticFileOptions
             {

@@ -509,7 +509,7 @@ namespace ShopStoreBackend.Controllers
         {
             try
             {
-                MANAGER.editOrder(orders);
+                MANAGER.EditOrder(orders);
                 MINIOSVC.AddUserMsg(postQueues);
                 return Json(new { success = true });
             }
