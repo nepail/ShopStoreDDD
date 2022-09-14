@@ -1,6 +1,7 @@
 # ShopStoreDDD
 
 購物車前台及後台管理系統，Asp.net Core 技術開發
+以MVC架構為基礎，分層DDD三層架構
 
 ## 功能
 * 會員註冊、登入
